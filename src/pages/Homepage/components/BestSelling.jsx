@@ -6,8 +6,8 @@ import { FaStar } from 'react-icons/fa'
 export default function BestSelling() {
     return (
         <div className="wrap bg-purple-950">
-            <div className="grid grid-cols-2 items-center">
-                <div className="text-wrap text-purple-300 p-5 ml-12">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+                <div className="text-wrap text-purple-300 p-5 lg:ml-12 py-16 lg:py-auto">
                     <div className="heading text-4xl">
                         <h1 className='text-white font-extrabold'>Best Seller</h1>
                     </div>
@@ -26,7 +26,7 @@ export default function BestSelling() {
                         <button className={`${purpleBtnClass} w-1/3 my-3`}> Buy Now</button>
                     </div>
 
-                    <div className="grid grid-cols-3 mt-2">
+                    <div className="grid grid-cols-3 mt-5">
                         <div className="text-wrap text-3xl">
                             <span>$1.5K+</span> <br />
                             <span className='text-sm'>Revenue Generated</span>

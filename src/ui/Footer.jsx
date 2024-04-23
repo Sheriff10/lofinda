@@ -23,7 +23,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className="box-wrap col-span-3">
-                        <div className="grid grid-cols-3">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-10">
                             <div className="box text-gray-300">
                                 <div className="heading font-bold text-xl text-purple-700">
                                     <span>Quick Link</span>
