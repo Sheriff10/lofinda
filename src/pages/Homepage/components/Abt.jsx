@@ -9,13 +9,15 @@ export default function Abt() {
         "mask2.png",
     ]
     return (
-        <div className="wrap py-20">
+        <div className="wrap py-20 relative">
             <Container>
+                <img src="/asset/8.png" alt="shine" className='absolute w-[400px] right-0 top-0' />
+                <img src="/asset/7.png" alt="shine" className='absolute w-[400px] left-0 z-[-1]' />
                 <div className="grid lg:grid-cols-2 gap-10 items-center">
                     <div className="img-wrap flex justify-around items-center gap-5">
                         {imgArr.map((i, index) => (
                             <div className="wrap">
-                                <img src={`/asset/${i}`} alt={i} />
+                                <img src={`/asset/${i}`} className='z-10' alt={i} />
                             </div>
                         ))}
                     </div>
