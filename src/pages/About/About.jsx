@@ -9,16 +9,16 @@ export default function About() {
             <Header black={true} />
             <div className="bg-con-about">
                 <Container>
-                    <div className="grid grid-cols-3 py-32 gap-10">
+                    <div className="grid lg:grid-cols-3 py-32 gap-10 overflow-clip">
                         <div className="img-wrap">
-                            <div className="flex justify-center gap-3 items-center">
+                            <div className="flex justify-center gap-3 items-center   bg-back">
                                 <div className="wrap1 flex gap-3  flex-col justify-center items-center">
-                                    <img src="/asset/mask3.png" alt="Mask" className='h-[350px]' />
-                                    <img src="/asset/mask1.png" alt="Mask" className='w-[130px]' />
+                                    <img src="/asset/mask3.png" alt="Mask" className='lg:h-[350px] w-[100%]' />
+                                    <img src="/asset/mask1.png" alt="Mask" className='lg:w-[130px]' />
                                 </div>
                                 <div className="wrap2 flex gap-3 flex-col justify-center items-center">
-                                    <img src="/asset/mask2.png" alt="Mask" className='w-[130px]' />
-                                    <img src="/asset/mask4.png" alt="Mask" className='h-[350px]' />
+                                    <img src="/asset/mask2.png" alt="Mask" className='lg:w-[130px]' />
+                                    <img src="/asset/mask4.png" alt="Mask" className='lg:h-[350px]' />
                                 </div>
                             </div>
                         </div>
