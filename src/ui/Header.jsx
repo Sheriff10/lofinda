@@ -2,20 +2,20 @@ import React from "react";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ black }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navigation = [
-        { name: "Product", href: "#" },
-        { name: "Features", href: "#" },
-        { name: "Marketplace", href: "#" },
-        { name: "Company", href: "#" },
+        { name: "Home", href: "/" },
+        { name: "About Us", href: "/about" },
+        { name: "Perfumes", href: "/perfumes" },
+        { name: "Contact Us", href: "/contact" },
     ];
     const navi = useNavigate();
 
     return (
-        <header className="absolute inset-x-0 top-0 z-50 bg-white bg-opacity-10 backdrop-blur-md  text-gray-50 shadow">
+        <header className="absolute inset-x-0 top-0 z-50 bg-black bg-opacity-10 backdrop-blur-md  text-gray-50 shadow">
             <nav
                 className="flex items-center justify-between p-6 lg:px-8"
                 aria-label="Global"
@@ -42,13 +42,13 @@ export default function Header() {
                 </div>
                 <div className="hidden lg:flex lg:gap-x-12">
                     {navigation.map((item) => (
-                        <a
+                        <NavLink
                             key={item.name}
-                            href={item.href}
-                            className="text-sm font-semibold leading-6 text-gray-50"
+                            to={item.href}
+                            className={`text-sm font-semibold leading-6 ${black ? 'text-black' : "text-gray-50"}`}
                         >
                             {item.name}
-                        </a>
+                        </NavLink>
                     ))}
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">

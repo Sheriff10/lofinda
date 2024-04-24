@@ -1,4 +1,10 @@
 .intro {
-  background: url('../public/asset/Background.png') no-repeat;
-  background-size: cover;
+	background: url("../public/asset/Background.png") no-repeat;
+	background-size: cover;
+}
+
+.bg-con-about {
+	background: url("../public/asset/8.png") no-repeat;
+	background-size: contain;
+  background-position: center center;
 }
