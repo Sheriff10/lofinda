@@ -24,7 +24,7 @@ export default function About() {
                         </div>
 
                         <div className="text-wrap col-span-2">
-                            <div className="heading text-3xl lg:text-5xl text-purple-800 font-bold mb-3">
+                            <div className="heading text-3xl lg:text-5xl text-primary font-bold mb-3">
                                 <h1>Our Story</h1>
                             </div>
                             <div className="text text-sm">
@@ -45,7 +45,7 @@ export default function About() {
                         </div>
                     </div>
 
-                    <div className="quote text-center text-purple-600 mb-16">
+                    <div className="quote text-center text-primary mb-16">
                         <p className='italic text-lg px-10 mb-10'>At Lofinda.ng, we believe that perfume is more than just a fragrance-it’s a personal signature, a form of self expression that captures the essence of who you are. Our Journey began in 2024, with a passion for creating scents that evoke emotions, memories and dreams.</p>
 
                         <span className=' font-extrabold text-xl'>~ Chief Oloye (CEO of Lofinda)</span>

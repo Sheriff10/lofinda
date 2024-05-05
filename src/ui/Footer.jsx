@@ -5,7 +5,7 @@ import Container from './Container'
 export default function Footer() {
     const socialImg = ["instagram.png", "x.png", "linkedin.png"]
     return (
-        <div className="wrap bg-neutral-950">
+        <div className="wrap bg-secondary">
             <Container>
                 <div className="grid lg:grid-cols-4 py-16 items-center gap-10">
                     <div className="logo-wrap">
@@ -15,9 +15,9 @@ export default function Footer() {
                         </div>
 
                         <div className="newsletter">
-                            <span className='font-bold text-lg text-purple-800'>Subscribe to our channel</span>
+                            <span className='font-bold text-lg text-primary'>Subscribe to our channel</span>
 
-                            <div className="input-wrap flex border-[1px] border-purple-500 rounded-full mt-2">
+                            <div className="input-wrap flex border-[1px] border-primary rounded-full mt-2">
                                 <input type="text" className='w-full bg-transparent border-0 rounded-l-full px-3' placeholder='Enter your email' /> <button className={`${purpleBtnClass}`}> Subscribe</button>
                             </div>
                         </div>
@@ -25,7 +25,7 @@ export default function Footer() {
                     <div className="box-wrap col-span-3">
                         <div className="grid grid-cols-2 lg:grid-cols-3 gap-10">
                             <div className="box text-gray-300">
-                                <div className="heading font-bold text-xl text-purple-700">
+                                <div className="heading font-bold text-xl text-primary">
                                     <span>Quick Link</span>
                                 </div>
                                 <div className="wrap">
@@ -39,7 +39,7 @@ export default function Footer() {
                             </div>
 
                             <div className="box text-gray-300">
-                                <div className="heading font-bold text-xl text-purple-700">
+                                <div className="heading font-bold text-xl text-primary">
                                     <span>Quick Link</span>
                                 </div>
                                 <div className="wrap">
@@ -53,7 +53,7 @@ export default function Footer() {
                             </div>
 
                             <div className="box text-gray-300">
-                                <div className="heading font-bold text-xl text-purple-700">
+                                <div className="heading font-bold text-xl text-primary">
                                     <span>Quick Link</span>
                                 </div>
                                 <div className="wrap">
@@ -66,7 +66,7 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-                <div className="caption flex justify-between items-center py-5 border-t-[1px] border-t-purple-800">
+                <div className="caption flex justify-between items-center py-5 border-t-[1px] border-t-primary">
                     <span className='text-white text-lg'>&copy; 2024. Alejo. All rights reserved.</span>
                     <div className="img-wrap flex gap-5 items-center">
                         {socialImg.map((i, index) => (

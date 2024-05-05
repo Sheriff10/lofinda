@@ -54,7 +54,7 @@ export default function Header({ black }) {
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <a
                         href="#"
-                        className="text-sm bg-purple-800 p-3 rounded-full font-semibold leading-6 text-white btn bg-pri"
+                        className="text-sm bg-primary p-3 rounded-full font-semibold leading-6 text-white btn bg-pri"
                         onClick={() => navi("/auth/login")}
                     >
                         Log in <span aria-hidden="true">&rarr;</span>
@@ -104,7 +104,7 @@ export default function Header({ black }) {
                             <div className="py-6">
                                 <a
                                     href="#"
-                                    className="-mx-3 btn bg-purple-800 text-center p-3 rounded-full  block px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
+                                    className="-mx-3 btn bg-primary text-center p-3 rounded-full  block px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
                                     onClick={() => navi("/auth/login")}
                                 >
                                     Log in

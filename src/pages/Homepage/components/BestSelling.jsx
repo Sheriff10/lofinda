@@ -5,11 +5,11 @@ import { FaStar } from 'react-icons/fa'
 
 export default function BestSelling() {
     return (
-        <div className="wrap bg-purple-950">
+        <div className="wrap bg-secondary">
             <div className="grid lg:grid-cols-2 gap-10 items-center">
-                <div className="text-wrap text-purple-300 p-5 lg:ml-12 py-16 lg:py-auto">
+                <div className="text-wrap text-primary-light p-5 lg:ml-12 py-16 lg:py-auto">
                     <div className="heading text-4xl">
-                        <h1 className='text-white font-extrabold'>Best Seller</h1>
+                        <h1 className='text-primary font-extrabold'>Best Seller</h1>
                     </div>
                     <div className="detail">
                         <h3 className='text-3xl my-4'>Kodak White</h3>

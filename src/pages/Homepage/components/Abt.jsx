@@ -23,7 +23,7 @@ export default function Abt() {
                     </div>
                     <div className="text-wrap text-center">
                         <div className="heading">
-                            <h1 className='text-4xl font-extrabold text-purple-800 mb-4'>About Lofinda.ng</h1>
+                            <h1 className='text-4xl font-extrabold text-primary mb-4'>About Lofinda.ng</h1>
                         </div>
                         <div className="text-wrap">
                             <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis vel blanditiis quis doloribus dolorem eveniet illo nostrum. Aliquid quia eius illum deserunt nulla quo aperiam placeat distinctio sit. Cum, magnam.</span> <br /> <br />
