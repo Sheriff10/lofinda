@@ -35,7 +35,7 @@ export default function Header({ black }) {
                     <div className="wrap relative">
                         <button
                             type="button"
-                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black"
+                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
                             onClick={() => navi('/perfumes/cart')}
                         >
                             <span className="sr-only">Open main menu</span>
@@ -44,7 +44,7 @@ export default function Header({ black }) {
                     </div>
                     <button
                         type="button"
-                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black"
+                        className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5  ${black ? 'text-black' : "text-gray-50"}`}
                         onClick={() => setMobileMenuOpen(true)}
                     >
                         <span className="sr-only">Open main menu</span>
@@ -66,7 +66,7 @@ export default function Header({ black }) {
                     <div className="wrap relative flex">
                         <button
                             type="button"
-                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-black"
+                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
                             onClick={() => navi('/perfumes/cart')}
                         >
                             <span className="sr-only">Open main menu</span>
