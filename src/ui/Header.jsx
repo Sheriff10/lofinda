@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 export default function Header({ black }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -51,13 +52,20 @@ export default function Header({ black }) {
                         </NavLink>
                     ))}
                 </div>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-3">
                     <a
                         href="#"
-                        className="text-sm bg-primary p-3 rounded-full font-semibold leading-6 text-white btn bg-pri"
+                        className="text-sm bg-primary p-3 px-6 rounded-full font-semibold leading-6 text-white btn bg-pri"
                         onClick={() => navi("/auth/login")}
                     >
                         Log in <span aria-hidden="true">&rarr;</span>
+                    </a>
+                    <a
+                        href="#"
+                        className="text-sm bg-secondary p-3 px-6 rounded-full flex items-center gap-2 font-semibold leading-6 text-white btn bg-pri"
+                        onClick={() => navi("/auth/signup")}
+                    >
+                        Signup <span aria-hidden="true"><FaUser /></span>
                     </a>
                 </div>
             </nav>
@@ -104,7 +112,7 @@ export default function Header({ black }) {
                             <div className="py-6">
                                 <a
                                     href="#"
-                                    className="-mx-3 btn bg-primary text-center p-3 rounded-full  block px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
+                                    className="-mx-3 btn bg-primary text-center p-3 rounded-full px-6  block py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
                                     onClick={() => navi("/auth/login")}
                                 >
                                     Log in

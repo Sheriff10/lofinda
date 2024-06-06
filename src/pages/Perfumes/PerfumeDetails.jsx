@@ -5,9 +5,12 @@ import Container from '../../ui/Container'
 import { FaArrowLeft, FaArrowRight, FaMinus, FaPlus, FaStar } from 'react-icons/fa'
 import { purpleBtnClass } from '../../utils/classes'
 import ProductCard from './components/ProductCard'
+import { useNavigate } from 'react-router-dom'
 
 export default function PerfumeDetails() {
     const dum = [1, 2, 3, 4, 5]
+
+    const navi = useNavigate()
 
     const featureFunc = (img, text) => ({ img, text })
     const featureArr = [
@@ -80,7 +83,7 @@ export default function PerfumeDetails() {
                                         <input type="text" value={1} className='w-1/2 border-0 text-center' />
                                         <span className='text-xs text-primary'><FaPlus /></span>
                                     </div>
-                                    <button className={`${purpleBtnClass} border border-white w-full`}>Add to Bag</button>
+                                    <button className={`${purpleBtnClass} border border-white w-full`} onClick={() => navi('/perfumes/cart')}>Add to Cart</button>
                                 </div>
                             </div>
                         </div>
