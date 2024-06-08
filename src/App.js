@@ -12,6 +12,8 @@ import ScrollToTop from "./ui/Scroll";
 import Contact from "./pages/Contact/Contact";
 
 function App() {
+	// window.api = "http://localhost:5000";
+	window.api = "https://lofinda-server.onrender.com";
 	return (
 		<div className="App">
 			<ScrollToTop />
