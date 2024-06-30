@@ -16,7 +16,6 @@ export default function Waitlist() {
     const isJoined = window.localStorage.getItem('join')
 
     const cancelButtonRef = useRef(null)
-    // sZ5IjN9jfHeWrKR5   lofinda mongodb-password
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,7 +34,7 @@ export default function Waitlist() {
     }
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog className="relative z-100" onClose={() => setOpen(true)}>
+            <Dialog className="relative z-100" initialFocus={cancelButtonRef} onClose={() => setOpen(true)}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
