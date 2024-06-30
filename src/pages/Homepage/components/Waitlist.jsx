@@ -34,7 +34,7 @@ export default function Waitlist() {
     }
     return (
         <Transition.Root show={open} as={Fragment}>
-            <Dialog className="relative z-100" initialFocus={cancelButtonRef} onClose={() => setOpen(true)}>
+            <Dialog className="relative z-100" initialFocus={cancelButtonRef} onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
