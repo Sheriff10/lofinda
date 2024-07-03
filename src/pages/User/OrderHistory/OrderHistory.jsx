@@ -32,7 +32,7 @@ export default function OrderHistory() {
                     </div>
                 </div>
 
-                <div className="filter flex justify-between items-center rounded-md p-3 px-5 bg-gray-100 my-10">
+                <div className="filter lg:flex justify-between items-center rounded-md p-3 px-5 bg-gray-100 my-10">
                     <div className="menu flex gap-4 font-semibold text-gray-500">
                         <a href="#" className='active-order-menu'>All Order</a>
                         <a href="#">Completed</a>
@@ -40,7 +40,7 @@ export default function OrderHistory() {
                         <a href="#">Cancelled</a>
                     </div>
 
-                    <div className="relative flex gap-2 items-center">
+                    <div className="relative flex gap-2 items-center lg:mt-auto mt-5">
                         <input
                             type="date"
                             id="phone-input"
@@ -64,7 +64,7 @@ export default function OrderHistory() {
                 </div>
 
                 {/* Order Table */}
-                <div className="wrap mb-10">
+                <div className="wrap mb-10 overflow-x-scroll">
                     <table className='w-full rounded-3xl overflow-clip bg-primary bg-opacity-10'>
                         <thead className='bg-primary text-gray-200'>
                             <tr>

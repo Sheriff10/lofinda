@@ -43,7 +43,25 @@ export default function Header({ black }) {
                         />
                     </a>
                 </div>
-                <div className="flex lg:hidden">
+                <div className="flex items-center gap-2 lg:hidden">
+                    <div className="wrap relative flex">
+                        <button
+                            type="button"
+                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
+                        </button>
+                        {show && (
+                            <div className="absolute text-black w-[300px] right-0 top-full p-5 rounded-lg bg-gray-100">
+                                <ul>
+                                    {userNavigation.map((i, index) => (
+                                        <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
                     <div className="wrap relative">
                         <button
                             type="button"
