@@ -10,6 +10,9 @@ import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import ScrollToTop from "./ui/Scroll";
 import Contact from "./pages/Contact/Contact";
+import OrderHistory from "./pages/User/OrderHistory/OrderHistory";
+import Profile from "./pages/User/Profle/Profile";
+import WishList from "./pages/User/WishList/WishList";
 
 function App() {
 	// window.api = "http://localhost:5000";
@@ -28,6 +31,11 @@ function App() {
 				{/* AUTH */}
 				<Route path="/auth/login" element={<Login />} />
 				<Route path="/auth/signup" element={<Signup />} />
+
+				{/* USER */}
+				<Route path="/user/order/history" element={<OrderHistory />} />
+				<Route path="/user/profile" element={<Profile />} />
+				<Route path="/user/wishlist" element={<WishList />} />
 			</Routes>
 		</div>
 	);

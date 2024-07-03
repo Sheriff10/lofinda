@@ -2,8 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { NavLink, useNavigate } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { FaRegBookmark, FaShapes, FaUser } from "react-icons/fa";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { BsMinecartLoaded } from "react-icons/bs";
+import { ImProfile } from "react-icons/im";
+import { IoWalletOutline } from "react-icons/io5";
 
 export default function Header({ black }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,6 +19,14 @@ export default function Header({ black }) {
     ];
     const navi = useNavigate();
 
+    // User Links 
+    const userNavigation = [
+        { name: "Profile", href: "/user/profile", icon: <ImProfile /> },
+        { name: "Orders", href: "/user/order/history", icon: <BsMinecartLoaded /> },
+        { name: "Wishlist", href: "/user/wishlist", icon: <FaRegBookmark /> },
+        { name: "Wallet", href: "/", icon: <IoWalletOutline /> },
+    ];
+    const [show, setShow] = useState(false)
     return (
         <header className="absolute inset-x-0 top-0 z-50 bg-black bg-opacity-10 backdrop-blur-md  text-gray-50 shadow">
             <nav
@@ -67,12 +79,32 @@ export default function Header({ black }) {
                         <button
                             type="button"
                             className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
+                        </button>
+                        {show && (
+                            <div className="absolute text-black w-[300px] right-0 top-full p-5 rounded-lg bg-gray-100">
+                                <ul>
+                                    {userNavigation.map((i, index) => (
+                                        <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="wrap relative flex">
+                        <button
+                            type="button"
+                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
                             onClick={() => navi('/perfumes/cart')}
                         >
                             <span className="sr-only">Open main menu</span>
-                            <ShoppingBagIcon className="h-10 w-10" aria-hidden="true" />
+                            <ShoppingBagIcon className="h-7 w-7" aria-hidden="true" />
                         </button>
                     </div>
+
                     <a
                         href="#"
                         className="text-sm bg-primary p-3 px-6 rounded-full font-semibold leading-6 text-white btn bg-pri"

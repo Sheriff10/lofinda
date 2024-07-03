@@ -1,0 +1,98 @@
+import React from 'react'
+import { FaSearch, FaUser } from 'react-icons/fa'
+import Header from '../../../ui/Header'
+import Container from '../../../ui/Container'
+import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
+import Footer from '../../../ui/Footer'
+
+export default function OrderHistory() {
+    const dum = [1, 2, 3, 4, 5, 6]
+    return (
+        <div className="wrap mt-[130px]">
+            <Header black={true} />
+            <Container>
+                <div className="header flex justify-between">
+                    <div className="relative">
+                        <div className="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
+                            <FaSearch className='text-primary' />
+                        </div>
+                        <input
+                            type="text"
+                            id="phone-input"
+                            aria-describedby="helper-text-explanation"
+                            className="bg-gray-50 border text-gray-800 text-sm rounded-full block w-full ps-10 p-3 dark:bg-transparent border-primary placeholder-gray-400"
+                            // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            placeholder="Search"
+                            required
+                        />
+                    </div>
+
+                    <div className="profile flex gap-1 items-center">
+                        <p>Welcome Sheezey </p> <span className='flex p-2 rounded-full border-2 border-primary'><FaUser /></span>
+                    </div>
+                </div>
+
+                <div className="filter flex justify-between items-center rounded-md p-3 px-5 bg-gray-100 my-10">
+                    <div className="menu flex gap-4 font-semibold text-gray-500">
+                        <a href="#" className='active-order-menu'>All Order</a>
+                        <a href="#">Completed</a>
+                        <a href="#">Pending</a>
+                        <a href="#">Cancelled</a>
+                    </div>
+
+                    <div className="relative flex gap-2 items-center">
+                        <input
+                            type="date"
+                            id="phone-input"
+                            aria-describedby="helper-text-explanation"
+                            className="bg-gray-50 border text-gray-800 text-sm rounded-md block w-full p-3 dark:bg-transparent border-primary placeholder-gray-400"
+                            // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            placeholder="First Name"
+                            required
+                        />
+                        <p className='font-bold'>TO</p>
+                        <input
+                            type="date"
+                            id="phone-input"
+                            aria-describedby="helper-text-explanation"
+                            className="bg-gray-50 border text-gray-800 text-sm rounded-md block w-full p-3 dark:bg-transparent border-primary placeholder-gray-400"
+                            // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            placeholder="First Name"
+                            required
+                        />
+                    </div>
+                </div>
+
+                {/* Order Table */}
+                <div className="wrap mb-10">
+                    <table className='w-full rounded-3xl overflow-clip bg-primary bg-opacity-10'>
+                        <thead className='bg-primary text-gray-200'>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th className=' text-center'>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dum.map((i, index) => (
+                                <tr className='hover:translate-x-3 transition-all hover:bg-primary hover:bg-opacity-15 rounded-3xl overflow-hidden'>
+                                    <td>#0012</td>
+                                    <td>John Doe</td>
+                                    <td>Active</td>
+                                    <td>#100</td>
+                                    <td>10-04-2024</td>
+                                    <td className=' flex justify-center'> <PiDotsThreeOutlineVerticalFill className='cursor-pointer' /></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </Container>
+
+            <Footer />
+        </div>
+    )
+}
