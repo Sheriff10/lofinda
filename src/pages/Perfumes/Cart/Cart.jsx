@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Header from '../../../ui/Header'
 import { FaArrowLeft, FaTrash } from 'react-icons/fa'
 import { whiteBtnClass } from '../../../utils/classes'
 import Container from '../../../ui/Container'
 import CartProducts from '../components/CartProducts'
 import Footer from '../../../ui/Footer'
+import { ShoppingCartContext } from '../../../context/ShoppingCartContext'
 
 export default function Cart() {
     const dum = [1, 2, 3,]
+    const { state, dispatch } = useContext(ShoppingCartContext)
     return (
         <>
             <Header black={true} />
@@ -25,8 +27,8 @@ export default function Cart() {
                 <Container>
                     <div className="grid lg:grid-cols-2 gap-5 mt-10">
                         <div className="wrap">
-                            {dum.map((prd, index) => (
-                                <CartProducts name="The Gentle Man" sub_name="by Givenchy" price="#20, 000" key={index} />
+                            {state.items?.map((prd, index) => (
+                                <CartProducts id={prd.id} _id={prd._id} name={prd.name} sub_name={prd.description} price={prd.price} img={prd.img} key={index} />
                             ))}
                         </div>
                         <div className="wrap bg-primary p-10 text-white">

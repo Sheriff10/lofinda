@@ -1,14 +1,18 @@
 // utils/apiUtils.js
 import axios from "axios";
-import { setCookie } from "./cookies";
+import { getCookie } from "./cookies";
 
-const apiRequest = async (url, method = "GET", body = null) => {
+const userApiReq = async (url, method = "GET", body = null) => {
+	const token = getCookie('auth-user-token')
+
+	if (!token) window.location.href = '/auth/login'
 	const config = {
 		method,
 		url: `${window.api}${url}`,
 		headers: {
 			"Content-Type": "application/json",
 			"Access-Control-Allow-Origin": "*",
+			"auth-user-token": token
 		},
 	};
 
@@ -18,13 +22,6 @@ const apiRequest = async (url, method = "GET", body = null) => {
 
 	try {
 		const response = await axios(config);
-
-		const token = response.headers["auth-user-token"];
-		if (token) {
-			setCookie("auth-user-token", token);
-			window.location.href = "/"
-		}
-
 		return response.data;
 	} catch (error) {
 		console.error("Error making request:", error);
@@ -32,4 +29,4 @@ const apiRequest = async (url, method = "GET", body = null) => {
 	}
 };
 
-export default apiRequest;
+export default userApiReq;

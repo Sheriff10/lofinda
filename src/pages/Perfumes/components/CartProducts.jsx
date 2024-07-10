@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaTrash } from 'react-icons/fa'
+import { ShoppingCartContext } from '../../../context/ShoppingCartContext'
+import { removeItem } from '../../../context/shoppingCartReducer'
 
-export default function CartProducts({ name, sub_name, price }) {
+export default function CartProducts({ id, _id, name, sub_name, price, img }) {
+    const { state, dispatch } = useContext(ShoppingCartContext)
+
     return (
-        <div className="box grid grid-cols-3 items-center border-b-2 py-5">
+        <div className="box grid grid-cols-3 gap-3 items-center border-b-2 py-5">
             <div className="img-wrap">
-                <img src="/asset/perfume.png" alt="Perfume" />
+                <img src={img} alt="Perfume" />
             </div>
-            <div className="col-span-2 flex flex-col justify-between">
+            <div className="col-span-2 flex flex-col gap-4 justify-between">
                 <div className="flex justify-between items-center mb-10">
                     <div className="wrap">
                         <p className='font-bold'>{name}</p>
                         <span>{sub_name}</span>
                     </div>
 
-                    <div className="wrap flex items-center gap-2 text-primary">
+                    <div className="wrap flex items-center gap-2 text-primary cursor-pointer" onClick={() => dispatch(removeItem(id))}>
                         <span>Remove </span> <FaTrash />
                     </div>
                 </div>

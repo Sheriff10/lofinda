@@ -3,11 +3,13 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaRegBookmark, FaShapes, FaUser } from "react-icons/fa";
+import { FaRegBookmark, FaShapes, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { BsMinecartLoaded } from "react-icons/bs";
 import { ImProfile } from "react-icons/im";
 import { IoWalletOutline } from "react-icons/io5";
+import { getCookie, removeCookie } from "../utils/cookies";
+import swalNotify from "../utils/swal";
 
 export default function Header({ black }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,7 +28,14 @@ export default function Header({ black }) {
         { name: "Wishlist", href: "/user/wishlist", icon: <FaRegBookmark /> },
         { name: "Wallet", href: "/", icon: <IoWalletOutline /> },
     ];
+    const token = getCookie("auth-user-token")
     const [show, setShow] = useState(false)
+
+    const logOut = () => {
+        removeCookie("auth-user-token")
+        swalNotify('info', "Logged out", "You have successfully logged out")
+        setShow(false)
+    }
     return (
         <header className="absolute inset-x-0 top-0 z-50 bg-black bg-opacity-10 backdrop-blur-md  text-gray-50 shadow">
             <nav
@@ -107,6 +116,10 @@ export default function Header({ black }) {
                                     {userNavigation.map((i, index) => (
                                         <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
                                     ))}
+                                    {token && (
+                                        <li className="hover:bg-red-500 hover:bg-opacity-15 p-3 rounded-lg transition-all text-red-600" onClick={logOut}><Link className="flex gap-2 items-center">{<FaSignOutAlt />} {"Logout"}</Link></li>
+                                    )}
+
                                 </ul>
                             </div>
                         )}
@@ -123,20 +136,24 @@ export default function Header({ black }) {
                         </button>
                     </div>
 
-                    <a
-                        href="#"
-                        className="text-sm bg-primary p-3 px-6 rounded-full font-semibold leading-6 text-white btn bg-pri"
-                        onClick={() => navi("/auth/login")}
-                    >
-                        Log in <span aria-hidden="true">&rarr;</span>
-                    </a>
-                    <a
-                        href="#"
-                        className="text-sm bg-secondary p-3 px-6 rounded-full flex items-center gap-2 font-semibold leading-6 text-white btn bg-pri"
-                        onClick={() => navi("/auth/signup")}
-                    >
-                        Signup <span aria-hidden="true"><FaUser /></span>
-                    </a>
+                    {!token && (
+                        <>
+                            <a
+                                href="#"
+                                className="text-sm bg-primary p-3 px-6 rounded-full font-semibold leading-6 text-white btn bg-pri"
+                                onClick={() => navi("/auth/login")}
+                            >
+                                Log in <span aria-hidden="true">&rarr;</span>
+                            </a>
+                            <a
+                                href="#"
+                                className="text-sm bg-secondary p-3 px-6 rounded-full flex items-center gap-2 font-semibold leading-6 text-white btn bg-pri"
+                                onClick={() => navi("/auth/signup")}
+                            >
+                                Signup <span aria-hidden="true"><FaUser /></span>
+                            </a>
+                        </>
+                    )}
                 </div>
             </nav>
 

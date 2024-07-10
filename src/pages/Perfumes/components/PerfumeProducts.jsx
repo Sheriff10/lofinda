@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from '../../../ui/Container'
 import ProductCard from './ProductCard'
+import apiRequest from '../../../utils/api-request'
 
 export default function PerfumeProducts() {
     const dum = [1, 2, 3, 4, 5, 1, 2, 2, 3,]
+    const [products, setProducts] = useState(null)
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    const getProducts = async () => {
+        try {
+            const response = await apiRequest('/api/get-products', "GET")
+            setProducts(response.message)
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div className="wrap py-16 pp">
             <Container>
@@ -27,8 +43,8 @@ export default function PerfumeProducts() {
 
                 <div className="wrap">
                     <div className="grid lg:grid-cols-4 gap-10">
-                        {dum.map((i, index) => (
-                            <ProductCard key={index} />
+                        {products?.map((i, index) => (
+                            <ProductCard _id={i._id} img={i.imageUrl} name={i.name} description={i.description} price={i.price} key={index} />
                         ))}
                     </div>
                 </div>
