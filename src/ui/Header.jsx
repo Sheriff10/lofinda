@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -10,6 +10,7 @@ import { ImProfile } from "react-icons/im";
 import { IoWalletOutline } from "react-icons/io5";
 import { getCookie, removeCookie } from "../utils/cookies";
 import swalNotify from "../utils/swal";
+import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
 export default function Header({ black }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,6 +21,9 @@ export default function Header({ black }) {
         { name: "Contact Us", href: "/contact" },
     ];
     const navi = useNavigate();
+
+    // context 
+    const { state } = useContext(ShoppingCartContext)
 
     // User Links 
     const userNavigation = [
@@ -101,29 +105,7 @@ export default function Header({ black }) {
                         </NavLink>
                     ))}
                 </div>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-3 items-center">
-                    <div className="wrap relative flex">
-                        <button
-                            type="button"
-                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
-                        </button>
-                        {show && (
-                            <div className="absolute text-black w-[300px] right-0 top-full p-5 rounded-lg bg-gray-100">
-                                <ul>
-                                    {userNavigation.map((i, index) => (
-                                        <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
-                                    ))}
-                                    {token && (
-                                        <li className="hover:bg-red-500 hover:bg-opacity-15 p-3 rounded-lg transition-all text-red-600" onClick={logOut}><Link className="flex gap-2 items-center">{<FaSignOutAlt />} {"Logout"}</Link></li>
-                                    )}
-
-                                </ul>
-                            </div>
-                        )}
-                    </div>
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-5 items-center">
 
                     <div className="wrap relative flex">
                         <button
@@ -133,8 +115,39 @@ export default function Header({ black }) {
                         >
                             <span className="sr-only">Open main menu</span>
                             <ShoppingBagIcon className="h-7 w-7" aria-hidden="true" />
+
+                            {/* Cart Amount */}
+                            <div className="wrap absolute bottom-[50%] left-[60%]">
+                                {state.items.length > 0 && (
+                                    <span className="bg-primary text-white text-xs rounded-full p-1 px-2">{state.items.length}</span>
+                                )}
+                            </div>
                         </button>
                     </div>
+                    {token && (
+                        <div className="wrap relative flex">
+                            <button
+                                type="button"
+                                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                            >
+                                <span className="sr-only">Open main menu</span>
+                                <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
+                            </button>
+                            {show && (
+                                <div className="absolute text-black w-[300px] right-0 top-full p-5 rounded-lg bg-gray-100">
+                                    <ul>
+                                        {userNavigation.map((i, index) => (
+                                            <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
+                                        ))}
+                                        {token && (
+                                            <li className="hover:bg-red-500 hover:bg-opacity-15 p-3 rounded-lg transition-all text-red-600" onClick={logOut}><Link className="flex gap-2 items-center">{<FaSignOutAlt />} {"Logout"}</Link></li>
+                                        )}
+
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    )}
 
                     {!token && (
                         <>

@@ -15,7 +15,7 @@ export default function ProductCard({ _id, img, name, description, price }) {
     }, [state])
     const handleCart = () => {
         const item = {
-            id: state.items.length, _id, img, name, description, price: parseInt(price), quantity: 0
+            id: state.items.length, _id, img, name, description, price: parseInt(price), quantity: 1
         }
         console.log(state)
         dispatch(addItem(item))

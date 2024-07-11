@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { BarLoader } from 'react-spinners'
 import { FaCheckSquare, FaEnvelope, FaPhone, FaUser } from 'react-icons/fa'
@@ -6,7 +6,7 @@ import { purpleBtnClass } from '../../../utils/classes'
 import apiRequest from '../../../utils/api-request'
 
 export default function Waitlist() {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const [firstname, setFirstname] = useState('')
@@ -32,6 +32,11 @@ export default function Waitlist() {
             alert(error.response.data.message)
         } finally { setLoading(false) }
     }
+    useEffect(() => {
+        setTimeout(() => {
+            setOpen(true)
+        }, 5000);
+    }, [])
     return (
         <Transition.Root show={open} as={Fragment}>
             <Dialog className="relative z-100" initialFocus={cancelButtonRef} onClose={setOpen}>
