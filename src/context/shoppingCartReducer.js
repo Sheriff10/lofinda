@@ -8,9 +8,9 @@ export const addItem = (item) => ({
 	type: "ADD_ITEM",
 	payload: item,
 });
-export const removeItem = (id) => ({
+export const removeItem = (id, price, quantity) => ({
 	type: "REMOVE_ITEM",
-	payload: id,
+	payload: { id, price, quantity },
 });
 export const clearCart = () => ({
 	type: "CLEAR_CART",
@@ -37,10 +37,14 @@ const shoppingCartReducer = (state, action) => {
 			};
 		case "REMOVE_ITEM":
 			const filteredItems = state.items.filter(
-				(item) => item.id !== action.payload,
+				(item) => item.id !== action.payload.id,
 			);
 			const newTotal =
 				state.total - action.payload.price * action.payload.quantity;
+			console.log({
+				ll: action.payload.quantity,
+				kk: action.payload.price,
+			});
 			return {
 				...state,
 				items: filteredItems,

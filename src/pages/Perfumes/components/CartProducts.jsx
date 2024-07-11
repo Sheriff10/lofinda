@@ -3,7 +3,7 @@ import { FaTrash } from 'react-icons/fa'
 import { ShoppingCartContext } from '../../../context/ShoppingCartContext'
 import { decreaseQuantity, increaseQuantity, removeItem } from '../../../context/shoppingCartReducer'
 
-export default function CartProducts({ id, _id, name, sub_name, price, img, quantity}) {
+export default function CartProducts({ id, _id, name, sub_name, price, img, quantity }) {
     const { state, dispatch } = useContext(ShoppingCartContext)
 
     return (
@@ -18,7 +18,7 @@ export default function CartProducts({ id, _id, name, sub_name, price, img, quan
                         <span>{sub_name}</span>
                     </div>
 
-                    <div className="wrap flex items-center gap-2 text-primary cursor-pointer" onClick={() => dispatch(removeItem(id))}>
+                    <div className="wrap flex items-center gap-2 text-primary cursor-pointer" onClick={() => dispatch(removeItem(id, price, quantity))}>
                         <span>Remove </span> <FaTrash />
                     </div>
                 </div>
@@ -27,7 +27,7 @@ export default function CartProducts({ id, _id, name, sub_name, price, img, quan
                     <p>${price}</p>
 
                     <div className="wrap flex items-center">
-                        <span className='bg-primary-light flex rounded-full p-2 px-[14px] text-sm cursor-pointer'  onClick={() => dispatch(decreaseQuantity(id, price))}>-</span>
+                        <span className='bg-primary-light flex rounded-full p-2 px-[14px] text-sm cursor-pointer' onClick={() => dispatch(decreaseQuantity(id, price))}>-</span>
                         <input type="text" className='text-sm border-0 p-2 bg-transparent w-[30px] text-center' value={quantity} readOnly />
                         <span className='bg-primary-light flex rounded-full p-2 px-[14px] text-sm cursor-pointer' onClick={() => dispatch(increaseQuantity(id, price))}>+</span>
                     </div>

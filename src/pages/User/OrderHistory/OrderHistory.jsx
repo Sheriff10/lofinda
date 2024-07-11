@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaSearch, FaUser } from 'react-icons/fa'
 import Header from '../../../ui/Header'
 import Container from '../../../ui/Container'
 import { PiDotsThreeOutlineVerticalFill } from 'react-icons/pi'
 import Footer from '../../../ui/Footer'
+import userApiReq from '../../../utils/userApiWithAuth'
 
 export default function OrderHistory() {
     const dum = [1, 2, 3, 4, 5, 6]
+    const [orders, setOrders] = useState([])
+
+    useEffect(() => {
+        getOrders()
+    }, [])
+
+    const getOrders = async () => {
+        try {
+            const response = await userApiReq('/api/user/orders', "GET")
+            setOrders(response)
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div className="wrap mt-[130px]">
             <Header black={true} />
@@ -68,22 +84,22 @@ export default function OrderHistory() {
                     <table className='w-full rounded-3xl overflow-clip bg-primary bg-opacity-10'>
                         <thead className='bg-primary text-gray-200'>
                             <tr>
-                                <th>Id</th>
-                                <th>Name</th>
+                                <th>Order Id</th>
+                                <th>Total Product</th>
+                                <th>Amount</th>
                                 <th>Status</th>
-                                <th>Total</th>
                                 <th>Date</th>
                                 <th className=' text-center'>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {dum.map((i, index) => (
-                                <tr className='hover:translate-x-3 transition-all hover:bg-primary hover:bg-opacity-15 rounded-3xl overflow-hidden'>
-                                    <td>#0012</td>
-                                    <td>John Doe</td>
-                                    <td>Active</td>
-                                    <td>#100</td>
-                                    <td>10-04-2024</td>
+                            {orders.map((i, index) => (
+                                <tr className='hover:translate-x-3 transition-all hover:bg-primary hover:bg-opacity-15 rounded-3xl overflow-hidden' key={index}>
+                                    <td>{i._id}</td>
+                                    <td>{i.total_product} products</td>
+                                    <td>${i.totalAmount}</td>
+                                    <td>{i.status}</td>
+                                    <td>{i.createdAt}</td>
                                     <td className=' flex justify-center'> <PiDotsThreeOutlineVerticalFill className='cursor-pointer' /></td>
                                 </tr>
                             ))}

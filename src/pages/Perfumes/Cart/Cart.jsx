@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Header from '../../../ui/Header'
 import { FaArrowLeft, FaShoppingCart, FaTrash } from 'react-icons/fa'
 import { purpleBtnClass, whiteBtnClass } from '../../../utils/classes'
@@ -7,11 +7,37 @@ import CartProducts from '../components/CartProducts'
 import Footer from '../../../ui/Footer'
 import { ShoppingCartContext } from '../../../context/ShoppingCartContext'
 import { useNavigate } from 'react-router-dom'
+import userApiReq from '../../../utils/userApiWithAuth'
+import swalNotify from '../../../utils/swal'
+import { BarLoader } from 'react-spinners'
 
 export default function Cart() {
     const { state, dispatch } = useContext(ShoppingCartContext)
 
+    const [loading, setLoading] = useState(false)
     const navi = useNavigate()
+
+    const checkout = async () => {
+        try {
+            setLoading(false)
+
+            const data = {
+                products: state.items?.map((i) => ({
+                    productID: i._id,
+                    quantity: i.quantity
+                })),
+                totalAmount: state.total
+            }
+            const response = await userApiReq('/api/user/checkout', "POST", data)
+            swalNotify('success', "Success", "Your Order has been created")
+            navi('/user/order/history')
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+            swalNotify('error', "Error", error.response.data.message)
+        }
+        finally { setLoading(false) }
+    }
 
     return (
         <>
@@ -58,16 +84,19 @@ export default function Cart() {
                                     <span className='font-bold text-2xl text-white'>{state.total}</span>
                                 </div>
                                 <div className="btn-wrap">
-                                    <button className={`${whiteBtnClass} w-full text-sm`}> Check Out</button>
+                                    <button className={`${whiteBtnClass} w-full text-sm`} onClick={checkout}>  {loading ? <BarLoader color="#000" /> : "Check out"}</button>
                                 </div>
                             </div>
                         </div>
                     )}
-                    <div className="bg-primary bg-opacity-20 leading-10 rounded-3xl p-10 text-center lg:w-1/2 mx-auto mt-10">
-                        <h1 className='text-3xl font-bold'>No Items Found</h1>
-                        <span>You haven't added any item to you cart.</span> <br />
-                        <button className={`mx-auto p-2 bg-primary rounded-xl text-white flex gap-2 justify-center items-center px-3 hover:scale-[0.8] transition-all`} onClick={() => navi('/perfumes')}>Go shopping now <FaShoppingCart /></button>
-                    </div>
+                    {state.items.length === 0 && (
+                        <div className="bg-primary bg-opacity-20 leading-10 rounded-3xl p-10 text-center lg:w-1/2 mx-auto mt-10">
+                            <h1 className='text-3xl font-bold'>No Items Found</h1>
+                            <span>You haven't added any item to you cart.</span> <br />
+                            <button className={`mx-auto p-2 bg-primary rounded-xl text-white flex gap-2 justify-center items-center px-3 hover:scale-[0.8] transition-all`} onClick={() => navi('/perfumes')}>Go shopping now <FaShoppingCart /></button>
+                        </div>
+                    )}
+
                 </Container>
             </div>
             <Footer />
