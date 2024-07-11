@@ -57,32 +57,43 @@ export default function Header({ black }) {
                     </a>
                 </div>
                 <div className="flex items-center gap-2 lg:hidden">
+                    {token && (
+                        <div className="wrap relative flex">
+                            <button
+                                type="button"
+                                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                            >
+                                <span className="sr-only">Open main menu</span>
+                                <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
+                            </button>
+                            {show && (
+                                <div className="absolute text-black w-[300px] right-0 top-full p-5 rounded-lg bg-gray-100">
+                                    <ul>
+                                        {userNavigation.map((i, index) => (
+                                            <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
+                                        ))}
+                                        <li className="hover:bg-red-500 hover:bg-opacity-15 p-3 rounded-lg transition-all text-red-600" onClick={logOut}><Link className="flex gap-2 items-center">{<FaSignOutAlt />} {"Logout"}</Link></li>
+
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    )}
                     <div className="wrap relative flex">
-                        <button
-                            type="button"
-                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
-                        </button>
-                        {show && (
-                            <div className="absolute text-black w-[300px] right-0 top-full p-5 rounded-lg bg-gray-100">
-                                <ul>
-                                    {userNavigation.map((i, index) => (
-                                        <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-                    <div className="wrap relative">
                         <button
                             type="button"
                             className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
                             onClick={() => navi('/perfumes/cart')}
                         >
                             <span className="sr-only">Open main menu</span>
-                            <ShoppingBagIcon className="h-8 w-8" aria-hidden="true" />
+                            <ShoppingBagIcon className="h-7 w-7" aria-hidden="true" />
+
+                            {/* Cart Amount */}
+                            <div className="wrap absolute bottom-[50%] left-[60%]">
+                                {state.items.length > 0 && (
+                                    <span className="bg-primary text-white text-xs rounded-full p-1 px-2">{state.items.length}</span>
+                                )}
+                            </div>
                         </button>
                     </div>
                     <button
@@ -139,9 +150,7 @@ export default function Header({ black }) {
                                         {userNavigation.map((i, index) => (
                                             <li className="hover:bg-primary hover:bg-opacity-15 p-3 rounded-lg transition-all" key={index}><Link to={i.href} className="flex gap-2 items-center">{i.icon} {i.name}</Link></li>
                                         ))}
-                                        {token && (
-                                            <li className="hover:bg-red-500 hover:bg-opacity-15 p-3 rounded-lg transition-all text-red-600" onClick={logOut}><Link className="flex gap-2 items-center">{<FaSignOutAlt />} {"Logout"}</Link></li>
-                                        )}
+                                        <li className="hover:bg-red-500 hover:bg-opacity-15 p-3 rounded-lg transition-all text-red-600" onClick={logOut}><Link className="flex gap-2 items-center">{<FaSignOutAlt />} {"Logout"}</Link></li>
 
                                     </ul>
                                 </div>
@@ -209,15 +218,17 @@ export default function Header({ black }) {
                                     </NavLink>
                                 ))}
                             </div>
-                            <div className="py-6">
-                                <a
-                                    href="#"
-                                    className="-mx-3 btn bg-primary text-center p-3 rounded-full px-6  block py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
-                                    onClick={() => navi("/auth/login")}
-                                >
-                                    Log in
-                                </a>
-                            </div>
+                            {!token && (
+                                <div className="py-6">
+                                    <a
+                                        href="#"
+                                        className="-mx-3 btn bg-primary text-center p-3 rounded-full px-6  block py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
+                                        onClick={() => navi("/auth/login")}
+                                    >
+                                        Log in
+                                    </a>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </Dialog.Panel>
