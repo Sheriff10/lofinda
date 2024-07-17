@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from '../../../ui/Container'
 
-export default function Intro() {
+export default function Intro({ setOpen }) {
     return (
         <div className="wrap intro">
             <Container>
@@ -20,7 +20,7 @@ export default function Intro() {
                         </span>
 
                         <div className="btn-wrap mt-10">
-                            <button className='bg-white text-black shadow-xl p-3 px-5 w-1/2 rounded-full text-sm'>Join Waitlist <span aria-hidden="true">&rarr;</span></button>
+                            <button className='bg-white text-black shadow-xl p-3 px-5 w-1/2 rounded-full text-sm' onClick={() => setOpen(true)}>Join Waitlist <span aria-hidden="true">&rarr;</span></button>
                         </div>
                     </div>
                 </div>

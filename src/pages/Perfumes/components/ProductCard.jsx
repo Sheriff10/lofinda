@@ -4,22 +4,37 @@ import { purpleBtnClass } from '../../../utils/classes'
 import { useNavigate } from 'react-router-dom'
 import { ShoppingCartContext } from '../../../context/ShoppingCartContext'
 import { addItem } from '../../../context/shoppingCartReducer'
+import addWishlist from '../../../utils/add-wishlist'
+import { getCookie } from '../../../utils/cookies'
 
 export default function ProductCard({ _id, img, name, description, price }) {
     const navi = useNavigate()
     const [btnText, setBtnText] = useState("Add to cart")
+    const [wishlist, setWishlist] = useState([])
 
     const { state, dispatch } = useContext(ShoppingCartContext)
-    useEffect(() => {
-        console.log(state.total)
-    }, [state])
+    // useEffect(() => {
+    //     console.log(state.total)
+    // }, [state])
     const handleCart = () => {
         const item = {
             id: state.items.length, _id, img, name, description, price: parseInt(price), quantity: 1
         }
-        console.log(state)
         dispatch(addItem(item))
         toggleBtnText()
+    }
+    useEffect(() => {
+        handleGetWishlist()
+    }, [])
+
+    const handleGetWishlist = () => {
+        const getWishlist = JSON.parse(getCookie('wishlist'))
+        setWishlist(!getWishlist ? [] : getWishlist)
+    }
+
+    const handleAddWishlist = () => {
+        addWishlist(_id)
+        handleGetWishlist()
     }
 
     const toggleBtnText = () => {
@@ -29,13 +44,23 @@ export default function ProductCard({ _id, img, name, description, price }) {
             setBtnText("Add to cart")
         }, 500);
     }
+    // wishlist.map((i) => i.productID === _id ? ("bg"))
+
+    let active = "bg-white"
+
+    for (let i = 0; i < wishlist.length; i++) {
+        const list = wishlist[i];
+        if (list.productId === _id) {
+            active = "bg-primary text-white"
+        }
+    }
 
     return (
         <div className="card hover:shadow-lg border p-4 rounded-lg relative">
             <div className="card-heading flex justify-between items-center">
                 <small className='text-primary'></small>
-                <div className="wrap flex absolute bg-white  top-[20px] right-[20px] rounded-xl transition-all hover:bg-primary hover:text-white bg-opacity-90 cursor-pointer">
-                    <span className='p-3 rounded-lg shadow-md'><FaStar /></span>
+                <div className={`wrap flex absolute ${active}  top-[20px] right-[20px] rounded-xl transition-all hover:bg-primary hover:text-white bg-opacity-90 cursor-pointer`}>
+                    <span className='p-3 rounded-lg shadow-md' onClick={() => { handleAddWishlist() }}><FaStar /></span>
                 </div>
             </div>
 

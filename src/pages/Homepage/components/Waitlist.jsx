@@ -4,9 +4,9 @@ import { BarLoader } from 'react-spinners'
 import { FaCheckSquare, FaEnvelope, FaPhone, FaUser } from 'react-icons/fa'
 import { purpleBtnClass } from '../../../utils/classes'
 import apiRequest from '../../../utils/api-request'
+import { getCookie } from '../../../utils/cookies'
 
-export default function Waitlist() {
-    const [open, setOpen] = useState(false)
+export default function Waitlist({ open, setOpen }) {
     const [loading, setLoading] = useState(false)
 
     const [firstname, setFirstname] = useState('')
@@ -35,7 +35,7 @@ export default function Waitlist() {
     useEffect(() => {
         setTimeout(() => {
             setOpen(true)
-        }, 5000);
+        }, 15000);
     }, [])
     return (
         <Transition.Root show={open} as={Fragment}>

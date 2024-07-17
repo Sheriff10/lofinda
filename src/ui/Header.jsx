@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -23,7 +22,7 @@ export default function Header({ black }) {
     const navi = useNavigate();
 
     // context 
-    const { state } = useContext(ShoppingCartContext)
+    const { state } = useContext(ShoppingCartContext);
 
     // User Links 
     const userNavigation = [
@@ -32,16 +31,36 @@ export default function Header({ black }) {
         { name: "Wishlist", href: "/user/wishlist", icon: <FaRegBookmark /> },
         { name: "Wallet", href: "/", icon: <IoWalletOutline /> },
     ];
-    const token = getCookie("auth-user-token")
-    const [show, setShow] = useState(false)
+    const token = getCookie("auth-user-token");
+    const [show, setShow] = useState(false);
 
     const logOut = () => {
-        removeCookie("auth-user-token")
-        swalNotify('info', "Logged out", "You have successfully logged out")
-        setShow(false)
-    }
+        removeCookie("auth-user-token");
+        swalNotify('info', "Logged out", "You have successfully logged out");
+        setShow(false);
+    };
+
+    // Handle scroll effect
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
-        <header className="absolute inset-x-0 top-0 z-50 bg-black bg-opacity-10 backdrop-blur-md  text-gray-50 shadow">
+        <header className={`fixed inset-x-0 top-0 z-50 transition-all ${isScrolled ? 'bg-black bg-opacity-70 backdrop-blur-lg' : 'bg-opacity-10 backdrop-blur-md'} text-gray-50 shadow`}>
             <nav
                 className="flex items-center justify-between p-6 lg:px-8"
                 aria-label="Global"
@@ -61,7 +80,7 @@ export default function Header({ black }) {
                         <div className="wrap relative flex">
                             <button
                                 type="button"
-                                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${isScrolled ? 'text-white' : ((black && !isScrolled) ? 'text-neutral-950' : 'text-gray-50')}`}
                             >
                                 <span className="sr-only">Open main menu</span>
                                 <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
@@ -82,7 +101,7 @@ export default function Header({ black }) {
                     <div className="wrap relative flex">
                         <button
                             type="button"
-                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${isScrolled ? 'text-white' : ((black && !isScrolled) ? 'text-neutral-950' : 'text-gray-50')}`}
                             onClick={() => navi('/perfumes/cart')}
                         >
                             <span className="sr-only">Open main menu</span>
@@ -98,7 +117,7 @@ export default function Header({ black }) {
                     </div>
                     <button
                         type="button"
-                        className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5  ${black ? 'text-black' : "text-gray-50"}`}
+                        className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5  ${isScrolled ? 'text-white' : ((black && !isScrolled) ? 'text-neutral-950' : 'text-gray-50')}`}
                         onClick={() => setMobileMenuOpen(true)}
                     >
                         <span className="sr-only">Open main menu</span>
@@ -110,7 +129,7 @@ export default function Header({ black }) {
                         <NavLink
                             key={item.name}
                             to={item.href}
-                            className={`text-sm font-semibold leading-6 ${black ? 'text-black' : "text-gray-50"}`}
+                            className={`text-sm font-semibold leading-6 ${isScrolled ? 'text-white' : ((black && !isScrolled) ? 'text-neutral-950' : 'text-gray-50')}`}
                         >
                             {item.name}
                         </NavLink>
@@ -121,7 +140,7 @@ export default function Header({ black }) {
                     <div className="wrap relative flex">
                         <button
                             type="button"
-                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                            className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${isScrolled ? 'text-white' : ((black && !isScrolled) ? 'text-neutral-950' : 'text-gray-50')}`}
                             onClick={() => navi('/perfumes/cart')}
                         >
                             <span className="sr-only">Open main menu</span>
@@ -139,7 +158,7 @@ export default function Header({ black }) {
                         <div className="wrap relative flex">
                             <button
                                 type="button"
-                                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${black ? 'text-black' : "text-gray-50"}`}
+                                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${isScrolled ? 'text-white' : ((black && !isScrolled) ? 'text-neutral-950' : 'text-gray-50')}`}
                             >
                                 <span className="sr-only">Open main menu</span>
                                 <FaRegCircleUser className="h-7 w-7" aria-hidden="true" onClick={() => setShow(!show)} />
