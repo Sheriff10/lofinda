@@ -17,7 +17,7 @@ import ShoppingCartProvider from "./context/ShoppingCartContext";
 
 function App() {
 	// window.api = "http://localhost:5000";
-	window.api = "https://lofinda-server.onrender.com";
+	window.api = "https://lofinda-server-aum3.onrender.com";
 	return (
 		<div className="App">
 			<ScrollToTop />
