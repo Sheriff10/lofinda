@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa";
 import { LuUsers2 } from "react-icons/lu";
 import { IoPersonAdd } from "react-icons/io5";
-import Waitlist from "../../../pages/Homepage/components/Waitlist";
 import WaitlistUsers from "./WaitlistUsers";
 import OrderUser from "./OrderUser";
 import { useNavigate } from "react-router-dom";

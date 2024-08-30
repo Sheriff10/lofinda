@@ -18,6 +18,9 @@ import AdminLogin from "./admin/auth/AdminLogin";
 import Dashboard from "./admin/pages/Dashboard/Dashboard";
 import Customers from "./admin/pages/Customers/Customers";
 import AddCustomer from "./admin/pages/Customers/AddCustomer";
+import Products from "./admin/pages/Products/Products";
+import AddProduct from "./admin/pages/Products/AddProduct";
+import Orders from "./admin/pages/Orders/Orders";
 
 function App() {
   // window.api = "http://localhost:5000";
@@ -51,6 +54,9 @@ function App() {
             path="/administration/customer/add"
             element={<AddCustomer />}
           />
+          <Route path="/administration/product" element={<Products />} />
+          <Route path="/administration/product/add" element={<AddProduct />} />
+          <Route path="/administration/orders" element={<Orders />} />
         </Routes>
       </ShoppingCartProvider>
     </div>
