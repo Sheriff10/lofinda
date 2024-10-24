@@ -40,6 +40,19 @@ const statusText = (key, text) => {
           </span>
         );
       return textWrapper;
+
+    case "published":
+      textWrapper =
+        text === true ? (
+          <span className="text-xs p-2 bg-green-400 bg-opacity-10 rounded-lg text-green-400">
+            Published
+          </span>
+        ) : (
+          <span className="text-xs p-2 bg-red-400 bg-opacity-10 rounded-lg text-red-400">
+            Unpublished
+          </span>
+        );
+      return textWrapper;
     default:
       break;
   }

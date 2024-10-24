@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../Layout/Layout";
 import { FaDownload, FaSearch } from "react-icons/fa";
 import { CiBoxes, CiShoppingTag } from "react-icons/ci";
@@ -8,23 +8,26 @@ import IconCard from "../../../ui/IconCard";
 import { FaNairaSign } from "react-icons/fa6";
 import ProductList from "./ProductList";
 import { useNavigate } from "react-router-dom";
+import { AdminContext } from "../../../context/AdminStatsContext";
 
 export default function Products() {
+  const { stats } = useContext(AdminContext);
+
   const statsData = [
     {
-      value: 152,
+      value: `$${parseInt(stats?.totalPriceOfStock)}`,
       text: "Total Inventory",
       icon: <FaNairaSign />,
       link: "/administration/orders",
     },
     {
-      value: 4,
+      value: stats?.totalProductsSold,
       text: "Total Product Sold",
       icon: <CiShoppingTag />,
       link: "/administration/orders",
     },
     {
-      value: 0,
+      value: stats?.outOfStockProducts,
       text: "Out of stock",
       icon: <CiBoxes />,
       link: "/administration/orders",
@@ -59,40 +62,7 @@ export default function Products() {
         </div>
 
         <div className="wrap mt-10">
-          <div className="filters flex justify-between py-2">
-            <div className="wrap flex gap-3">
-              <button className="p-2 bg-gray-200 rounded-lg">
-                <IoIosRefresh />
-              </button>
-
-              <select className="bg-gray-200 rounded-lg px-2 py-3 text-sm">
-                <option value="#">Status</option>
-                <option value="#">Unpublished</option>
-                <option value="#">Published</option>
-              </select>
-
-              <select className="bg-gray-200 rounded-lg px-2 py-3 text-sm">
-                <option value="#">Filter by Collection</option>
-                <option value="#">Krindle collection</option>
-                <option value="#">Pectorial collection</option>
-              </select>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                <FaSearch className="text-primary" />
-              </div>
-              <input
-                type="text"
-                id="phone-input"
-                aria-describedby="helper-text-explanation"
-                className="bg-gray-200 text-gray-800 text-sm rounded-lg block w-full pe-10 px-3 py-2 dark:bg-transparent border-primary placeholder-gray-400"
-                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                placeholder="Search"
-                required
-              />
-            </div>
-          </div>
-          <ProductList data={[1, 2, 3, 4]} />
+          <ProductList />
         </div>
       </div>
     </Layout>
