@@ -1,31 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../Layout/Layout";
 import { FaDownload, FaSearch } from "react-icons/fa";
 import { MdOutlineIndeterminateCheckBox } from "react-icons/md";
 import { RxPlus } from "react-icons/rx";
-import { IoIosRefresh } from "react-icons/io";
 import IconCard from "../../../ui/IconCard";
 import { CgCheckR } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import OrderList from "./OrderList";
 import { LuShoppingBag } from "react-icons/lu";
+import { AdminContext } from "../../../context/AdminStatsContext";
 
 export default function Orders() {
+  const { stats } = useContext(AdminContext);
+
   const statsData = [
     {
-      value: 8,
+      value: stats?.totalOrders,
       text: "Total Orders",
       icon: <LuShoppingBag />,
       link: "/administration/orders",
     },
     {
-      value: 4,
+      value: stats?.paidCount,
       text: "Paid Orders",
       icon: <CgCheckR />,
       link: "/administration/orders",
     },
     {
-      value: 0,
+      value: stats?.pendingCount,
       text: "Unpaid Orders",
       icon: <MdOutlineIndeterminateCheckBox />,
       link: "/administration/orders",
@@ -60,40 +62,7 @@ export default function Orders() {
         </div>
 
         <div className="wrap mt-10">
-          <div className="filters flex justify-between py-2">
-            <div className="wrap flex gap-3">
-              <button className="p-2 bg-gray-200 rounded-lg">
-                <IoIosRefresh />
-              </button>
-
-              <select className="bg-gray-200 rounded-lg px-2 py-3 text-sm">
-                <option value="#">Shipping</option>
-                <option value="#">Fufilled</option>
-                <option value="#">Unfulled</option>
-              </select>
-
-              <select className="bg-gray-200 rounded-lg px-2 py-3 text-sm">
-                <option value="#">Filter by Payment</option>
-                <option value="#">Krindle collection</option>
-                <option value="#">Pectorial collection</option>
-              </select>
-            </div>
-            <div className="relative">
-              <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                <FaSearch className="text-primary" />
-              </div>
-              <input
-                type="text"
-                id="phone-input"
-                aria-describedby="helper-text-explanation"
-                className="bg-gray-200 text-gray-800 text-sm rounded-lg block w-full pe-10 px-3 py-2 dark:bg-transparent border-primary placeholder-gray-400"
-                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                placeholder="Search"
-                required
-              />
-            </div>
-          </div>
-          <OrderList data={[1, 2, 3, 4]} />
+          <OrderList />
         </div>
       </div>
     </Layout>

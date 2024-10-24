@@ -1,7 +1,14 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { getUsers } from "../../../service/admin-api-service";
 
-export default function OrderUser({ data }) {
+export default function OrderUser() {
+  const { data: users = {} } = useQuery({
+    queryFn: () => getUsers(), // Corrected to pass the function reference
+    queryKey: ["users"],
+  });
+
   return (
     <div className="overflow-x-scroll">
       <table className="w-full">
@@ -16,26 +23,32 @@ export default function OrderUser({ data }) {
           </tr>
         </thead>
         <tbody>
-          {data.map((i, index) => (
-            <tr key={index}>
+          {users?.info?.users?.map((i, index) => (
+            <tr key={index} className="font-thin">
               <td>
                 <span>07/08/2023</span>
               </td>
               <td>
-                <span>Ibrahim Sheriff</span>
+                <span>
+                  {i.firstname} {i.lastname}
+                </span>
               </td>
               <td>
                 <div className="flex items-center">
-                  <span>5, gladys sowummi street, egbeda Lagos</span>{" "}
+                  <span>{i.address}</span>{" "}
                 </div>
               </td>
               <td>
                 <div className="flex items-center">
-                  <span>Ibrahimsheriff999@gmail.com</span>
+                  <span>{i.email}</span>
                 </div>
               </td>
               <td>
-                <span>08125926860</span>
+                {i.phone ? (
+                  i?.phone
+                ) : (
+                  <span className="text-xs font-thin">"no number yet"</span>
+                )}
               </td>
               <td>
                 <div className="flex items-center justify-center gap-3">

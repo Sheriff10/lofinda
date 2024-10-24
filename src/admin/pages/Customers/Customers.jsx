@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Layout from "../../Layout/Layout";
 import IconCard from "../../../ui/IconCard";
 import {
@@ -13,18 +13,21 @@ import { IoPersonAdd } from "react-icons/io5";
 import WaitlistUsers from "./WaitlistUsers";
 import OrderUser from "./OrderUser";
 import { useNavigate } from "react-router-dom";
+import { AdminContext } from "../../../context/AdminStatsContext";
 
 export default function Customers() {
+  const { stats } = useContext(AdminContext);
+
   const statsData = [
     {
-      value: 152,
+      value: stats?.totalCustomers,
       text: "Total Customer",
       icon: <FaEnvelopeSquare />,
       link: "/administration/orders",
     },
     {
-      value: 4,
-      text: "Total Customer",
+      value: stats?.activeUsers,
+      text: "Active Customer",
       icon: <LuUsers2 />,
       link: "/administration/orders",
     },
