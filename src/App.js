@@ -26,8 +26,8 @@ import AdminStatsContextWrap from "./context/AdminStatsContext";
 import PrivacyPolicy from "./pages/Homepage/components/PrivacyPolicy";
 
 function App() {
-  window.api = "http://localhost:5000";
-  // window.api = "https://lofinda-server-aum3.onrender.com";
+  // window.api = "http://localhost:5000";
+  window.api = "https://lofinda-server-aum3.onrender.com";
   return (
     <div className="App">
       <ScrollToTop />
